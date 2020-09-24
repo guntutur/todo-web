@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import FlipMove from "react-flip-move";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import todosStore from "../store/todos";
 import userStore from "../store/user";
 import "./TodoList.css";
@@ -27,15 +28,31 @@ class TodoItems extends Component {
         await todosStore.deleteItem(item._id, userStore.data);
     };
 
+    completeTodo = async (item) => {
+        var completedTodo = {
+            key: item.todo.key,
+            task_content: item.todo.task_content,
+            created_date: item.todo.created_date,
+            tags: "completed"
+        };
+        await todosStore.editItem(item._id,{
+            todo: completedTodo
+        });
+    };
+
     createTasks(item) {
         return <li
             className={todosStore.checkIsUploaded(item) ? "li-synced" : "li-unsynced"}
-            onClick={() => this.deleteTodo(item)}
+            // onClick={() => this.deleteTodo(item)}
             key={item.todo.key}>{
-                // item.todo.tags == "deleted" ?
-                //     <strike>item.todo.task_content</strike> :
+                item.todo.tags === "completed" ?
+                    <strike>item.todo.task_content</strike> :
                     item.todo.task_content
-            }</li>
+            }
+            <FontAwesomeIcon onClick={() => this.completeTodo(item)} style={{cursor:"pointer"}} icon="check-circle"></FontAwesomeIcon>
+            |
+            <FontAwesomeIcon style={{cursor:"pointer"}} icon="trash"></FontAwesomeIcon>
+        </li>
     }
 
     render() {
