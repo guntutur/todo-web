@@ -16,15 +16,6 @@ class TodoItems extends Component {
     }
 
     deleteTodo = async (item) => {
-        /*var updatedItem = {
-            key: item.todo.key,
-            task_content: item.todo.task_content,
-            created_date: item.todo.created_date,
-            tags: "deleted"
-        };
-        await todosStore.editItem(item._id, {
-            todo: updatedItem
-        }, userStore.data);*/
         await todosStore.deleteItem(item._id, userStore.data);
     };
 
@@ -43,7 +34,6 @@ class TodoItems extends Component {
     createTasks(item) {
         return <li
             className={todosStore.checkIsUploaded(item) ? "li-synced" : "li-unsynced"}
-            // onClick={() => this.deleteTodo(item)}
             key={item.todo.key}>{
                 item.todo.tags === "completed" ?
                     <strike>item.todo.task_content</strike> :
@@ -51,7 +41,7 @@ class TodoItems extends Component {
             }
             <FontAwesomeIcon onClick={() => this.completeTodo(item)} style={{cursor:"pointer"}} icon="check-circle"></FontAwesomeIcon>
             |
-            <FontAwesomeIcon style={{cursor:"pointer"}} icon="trash"></FontAwesomeIcon>
+            <FontAwesomeIcon onClick={() => this.deleteTodo(item)} style={{cursor:"pointer"}} icon="trash"></FontAwesomeIcon>
         </li>
     }
 
