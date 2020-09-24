@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import TodoList from "./TodoList";
+
+var destination = document.querySelector("#container");
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <div>
+        <TodoList/>
+    </div>,
+    destination
 );
 
 // If you want your app to work offline and load faster, you can change
