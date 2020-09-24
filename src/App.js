@@ -4,6 +4,9 @@ import "./todos/TodoList.css";
 import TodoList from "./todos/TodoList";
 import userStore from "./store/user";
 import todosStore from "./store/todos";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrash, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+library.add(faTrash, faCheckCircle);
 
 window.userStore = userStore;
 window.todosStore = todosStore;
@@ -83,7 +86,7 @@ class Landing extends BaseComponent {
 class Login extends BaseComponent {
   state = {
     email: '',
-  }
+  };
 
   render() {
     return (
@@ -103,7 +106,7 @@ class Login extends BaseComponent {
     this.setState({
       email: (event.target.value || '').trim(),
     });
-  }
+  };
 
   submit = async (event) => {
     event.preventDefault();
