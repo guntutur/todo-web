@@ -36,7 +36,7 @@ class TodoItems extends Component {
             className={todosStore.checkIsUploaded(item) ? "li-synced" : "li-unsynced"}
             key={item.todo.key}>{
                 item.todo.tags === "completed" ?
-                    <strike>item.todo.task_content</strike> :
+                    <strike>{item.todo.task_content}</strike> :
                     item.todo.task_content
             }
             <FontAwesomeIcon onClick={() => this.completeTodo(item)} style={{cursor:"pointer"}} icon="check-circle"></FontAwesomeIcon>
