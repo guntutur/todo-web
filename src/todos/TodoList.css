@@ -7,8 +7,7 @@
 .todoListMain .header button {
     padding: 10px;
     font-size: 16px;
-    margin: 10px;
-    margin-right: 0px;
+    margin: 10px 0 10px 10px;
     background-color: #0066FF;
     color: #FFF;
     border: 2px solid #0066FF;
@@ -26,15 +25,15 @@
 .todoListMain .theList li {
     color: #333;
     /*no default background color for each task*/
-    /*background-color: rgba(255,255,255,.5);*/
-    padding: 15px;
+    padding: 13px;
     margin-bottom: 15px;
     border-radius: 5px;
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     transition: background-color .2s ease-out;
-}
-.todoListMain .theList li:hover {
-    cursor: pointer;
 }
 ul.theList {
     padding: 0;
