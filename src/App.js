@@ -63,6 +63,15 @@ class App extends BaseComponent {
 
 class Landing extends BaseComponent {
 
+  formatter = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+  });
+
   state = {
     input_text: '',
   };
@@ -72,9 +81,18 @@ class Landing extends BaseComponent {
         <div>
           <h1>Offline-First Todo Apps with ReactJS and CouchDB</h1>
           <h2>{userStore.data.email} <button className={"button-style"} onClick={this.logout}>logout</button></h2>
+          <h3>last upload: {this.formatter.format(Date.parse(todosStore.dataMeta.tsUpload))}</h3>
           <TodoList/>
         </div>
     )
+  }
+
+  componentDidMount() {
+    this.unsubTodos = todosStore.subscribe(this.rerender);
+  }
+
+  componentWillUnmount() {
+    this.unsubTodos();
   }
 
   logout = async () => {
@@ -90,15 +108,15 @@ class Login extends BaseComponent {
 
   render() {
     return (
-        <form onSubmit={this.submit}>
-          <h1>login</h1>
-          <p>
-            email <input type='text' value={this.state.email} onChange={this.setInput_email} />
-          </p>
-          <p>
-            <button>submit</button>
-          </p>
-        </form>
+      <form onSubmit={this.submit}>
+        <h1>login</h1>
+        <p>
+          email <input type='text' value={this.state.email} onChange={this.setInput_email} />
+        </p>
+        <p>
+          <button>submit</button>
+        </p>
+      </form>
     );
   }
 
@@ -106,7 +124,7 @@ class Login extends BaseComponent {
     this.setState({
       email: (event.target.value || '').trim(),
     });
-  };
+  }
 
   submit = async (event) => {
     event.preventDefault();

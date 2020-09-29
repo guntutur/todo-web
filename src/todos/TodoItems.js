@@ -32,17 +32,19 @@ class TodoItems extends Component {
     };
 
     createTasks(item) {
-        return <li
-            className={todosStore.checkIsUploaded(item) ? "li-synced" : "li-unsynced"}
-            key={item.todo.key}>{
+        if (item.todo) {
+            return <li
+                className={todosStore.checkIsUploaded(item) ? "li-synced" : "li-unsynced"}
+                key={item.todo.key}>{
                 item.todo.tags === "completed" ?
                     <strike>{item.todo.task_content}</strike> :
                     item.todo.task_content
             }
-            <FontAwesomeIcon onClick={() => this.completeTodo(item)} style={{cursor:"pointer"}} icon="check-circle"></FontAwesomeIcon>
-            |
-            <FontAwesomeIcon onClick={() => this.deleteTodo(item)} style={{cursor:"pointer"}} icon="trash"></FontAwesomeIcon>
-        </li>
+                <FontAwesomeIcon onClick={() => this.completeTodo(item)} style={{cursor:"pointer"}} icon="check-circle"></FontAwesomeIcon>
+                |
+                <FontAwesomeIcon onClick={() => this.deleteTodo(item)} style={{cursor:"pointer"}} icon="trash"></FontAwesomeIcon>
+            </li>
+        }
     }
 
     render() {
